@@ -1,7 +1,10 @@
-
 # Multi-Tenant Authentication System
 
 This project implements a **multi-tenant authentication system** using MySQL and Node.js.
+
+## Repository Link
+Nabeekh Bhai, please check the program at the following link:
+🔗 [GitHub Repository](https://github.com/bukharirazahassan/multi-tenant-auth)
 
 ## Database Schema
 
@@ -34,12 +37,14 @@ This table stores user information, linked to tenants.
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fullName` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL UNIQUE,
+  `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tenant_id` int NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `tenant_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  FOREIGN KEY (`tenant_id`) REFERENCES `tenants`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
 
 ## Setup Instructions
@@ -80,3 +85,4 @@ To fetch all users:
 ```sql
 SELECT * FROM users;
 ```
+
