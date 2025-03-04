@@ -3,7 +3,7 @@
 This project implements a **multi-tenant authentication system** using MySQL and Node.js.
 
 ## Repository Link
-Nabeekh Bhai, please check the program at the following link:
+
 🔗 [GitHub Repository](https://github.com/bukharirazahassan/multi-tenant-auth)
 
 ## Database Schema
