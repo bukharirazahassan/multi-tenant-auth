@@ -2,3 +2,4 @@ node_modules/
 .cache/
 .git/objects/pack/
 *.pack
+node_modules/
