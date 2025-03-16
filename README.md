@@ -46,6 +46,54 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
 
+### Support Tickets Table
+
+This table stores support tickets for users.
+
+```sql
+CREATE TABLE `support_tickets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ticket_number` varchar(20) NOT NULL,
+  `user_id` bigint DEFAULT NULL,
+  `subject` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `status` enum('Open','In Progress','Resolved','Closed','On Hold') DEFAULT 'Open',
+  `priority` enum('Low','Medium','High','Urgent') DEFAULT 'Medium',
+  `assigned_to` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `closed_at` timestamp NULL DEFAULT NULL,
+  `resolution` text,
+  `email` varchar(255) DEFAULT NULL,
+  `ticket_date` date DEFAULT NULL,
+  `work_phone` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ticket_number` (`ticket_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+
+### External Users Table
+
+This table stores external users who interact with the system.
+
+```sql
+CREATE TABLE `external_users` (
+  `user_id` bigint NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `work_phone` varchar(20) DEFAULT NULL,
+  `addr_line1` varchar(255) DEFAULT NULL,
+  `addr_line2` varchar(255) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `postal` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+
 ## Role Management
 
 - **Superadmin**: A seed is created when starting `server.js`. It validates whether the role exists; if not, it creates the Superadmin with an ID.
@@ -97,5 +145,4 @@ To fetch all users:
 ```sql
 SELECT * FROM users;
 ```
-
 
